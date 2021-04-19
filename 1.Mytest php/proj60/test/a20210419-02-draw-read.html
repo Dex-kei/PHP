@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #rect {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #b0e9ff;
+        }
+
+        .ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff2f27;
+            border-radius: 50%;
+            left: 50px;
+            top: 50px;
+            border: 1px solid black;
+            pointer-events: none;
+            /* 不要感應滑鼠 */
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const rect = $('#rect');
+        let dataAr = [];
+
+
+        function createBall(o) { // dataObj
+            const b = $('<div class="ball"></div>');
+
+            b.css({
+                left: o.x - o.s / 2,
+                top: o.y - o.s / 2,
+                width: o.s,
+                height: o.s,
+                backgroundColor: o.c
+            });
+            rect.append(b);
+        }
+
+        $('button').click(function () {
+            let str = localStorage.getItem('drawData');
+            dataAr = JSON.parse(str);
+
+            for (let i of dataAr) {
+                createBall(i);
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>
