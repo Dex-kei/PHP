@@ -12,12 +12,12 @@ if(isset($_POST['name'])){
 
 
          // 檢查手機號碼格式 php裡面用正規表達式需要+ ""雙引號
-    $mobile_re = "/^09\d{2}-?\d{3}-?\d{3}$/"   
-    if(empty(preg_grep($mobile_re, [ $_POST['mobile']]))){
-        $output['error'] = '手機號碼格式不符';
-        echo json_encode($output, JSON_UNESCAPED_UNICODE);
-        exit; //結束,後面的程式不會執行,die()
-    }
+         $mobile_re = "/^09\d{2}-?\d{3}-?\d{3}$/";
+         if(empty(preg_grep($mobile_re, [ $_POST['mobile']]))){
+             $output['error'] = '手機號碼格式不符';
+             echo json_encode($output, JSON_UNESCAPED_UNICODE);
+             exit;  // 結束, 後面的程式不會執行, die()
+         }
     
 
     $sql = "INSERT INTO `address_book`(

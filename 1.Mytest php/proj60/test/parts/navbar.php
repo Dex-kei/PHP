@@ -1,3 +1,8 @@
+<?php
+    if(! isset($pageName)){
+        $pageName = '';
+    }
+?>
 <style>
     nav.navbar .nav-item.active {
         background-color: #5dc0df;
@@ -14,10 +19,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item <?= $pageName=='ab-list' ? 'active' : '' ?>">
                     <a class="nav-link" href="ab-list.php">列表</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= $pageName=='ab-insert' ? 'active' : '' ?>">
                     <a class="nav-link" href="ab-insert.php">新增</a>
                 </li>
 

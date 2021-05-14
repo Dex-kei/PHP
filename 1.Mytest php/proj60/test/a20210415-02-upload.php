@@ -4,8 +4,8 @@ $output = [];
 
 if(isset($_FILES['avatar'])){
     $output['file'] = $_FILES['avatar'];
-    $fname = __DIR__. '/imgs/'. $_FILES['avatar']['name'];
-    $output['m'] = move_uploaded_file($_FILES['avatar']['tmp_name'],$fname);
+    $fname =  __DIR__. '/imgs/'. $_FILES['avatar']['name'];
+    $output['m'] = move_uploaded_file($_FILES['avatar']['tmp_name'], $fname);
     echo json_encode($output);
 }
 

@@ -1,11 +1,11 @@
-<?php include __DIR__. '/parts/config.php'; ?>
+<?php include __DIR__ . '/parts/config.php'; ?>
 <?php
 $title = '會員登入';
 $pageName = 'login';
 ?>
 
-<?php include __DIR__. '/parts/html-head.php'; ?>
-<?php include __DIR__. '/parts/navbar.php'; ?>
+<?php include __DIR__ . '/parts/html-head.php'; ?>
+<?php include __DIR__ . '/parts/navbar.php'; ?>
 
 <style>
     form .form-group small.error {
@@ -16,13 +16,12 @@ $pageName = 'login';
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="card" >
+            <div class="card">
 
                 <div class="card-body">
                     <h5 class="card-title">會員登入</h5>
 
-                    <form name="form1" method="post" novalidate
-                          onsubmit="checkForm(); return false;">
+                    <form name="form1" method="post" novalidate onsubmit="checkForm(); return false;">
 
                         <div class="form-group">
                             <label for="email">** email</label>
@@ -47,7 +46,7 @@ $pageName = 'login';
 </div>
 
 
-<?php include __DIR__. '/parts/scripts.php'; ?>
+<?php include __DIR__ . '/parts/scripts.php'; ?>
 <script>
     const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
@@ -55,37 +54,37 @@ $pageName = 'login';
         $email = $('#email');
     const fileds = [$nickname, $email];
 
-    function checkForm(){
+    function checkForm() {
         //回復原來的狀態
-        fileds.forEach(el=>{
+        fileds.forEach(el => {
             el.css('border', '1px solid #cccccc');
             el.next().text('');
         });
 
-        let isPass =true;
+        let isPass = true;
 
-        if(! email_re.test($email.val())){
+        if (!email_re.test($email.val())) {
             isPass = false;
             $email.css('border', '1px solid red');
             $email.next().text('請輸入正確的 email');
         }
 
-        is(isPass){
-            $.post(
-                'login-api.php',
-                $(document.form1).serialize(),
-                function(data){
-                    if(data.success){
-                        alert('登入成功');
-                        location.href = './';
-                    } else {
-                        alert(data.error);
-                    }
-                },
-                'json'
-            )
-        }
+        is(isPass)
+        $.post(
+            'login-api.php',
+            $(document.form1).serialize(),
+            function(data) {
+                if (data.success) {
+                    alert('登入成功');
+                    location.href = './';
+                } else {
+                    alert(data.error);
+                }
+            },
+            'json'
+        )
     }
 
+    
 </script>
-<?php include __DIR__. '/parts/html-foot.php';?>
+<?php include __DIR__ . '/parts/html-foot.php'; ?>

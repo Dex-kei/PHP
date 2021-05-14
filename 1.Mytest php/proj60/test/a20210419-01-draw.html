@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
         #rect {
@@ -13,7 +13,6 @@
             height: 600px;
             background-color: #b0e9ff;
         }
-
         .ball {
             position: absolute;
             width: 20px;
@@ -23,78 +22,71 @@
             left: 50px;
             top: 50px;
             border: 1px solid black;
-            pointer-events: none;
-            /* 不要感應滑鼠 */
+            pointer-events: none; /* 不要感應滑鼠 */
         }
     </style>
 </head>
-
 <body>
-    <div id="rect">
-    </div>
-    <button>show data</button>
-    <textarea id="ta" cols="50" rows="30"></textarea>
+
+<div id="rect">
+</div>
+<button>show data</button>
+<textarea id="ta" cols="50" rows="30"></textarea>
 
 
+<script src="../lib/jquery-3.6.0.js"></script>
 
-    <script src="../lib/jquery-3.6.0.js"></script>
+<script>
+    const rect = $('#rect');
+    const dataAr = [];
 
-    <script>
-        const rect = $('#rect');
-        const dataAr = [];
+    function randomColor() {
+        let v = parseInt(Math.random()*16777216);
+        let s = v.toString(16);
+        const zero = '000000';
+        return '#' + zero.slice(0, 6-s.length) + s;
+    }
 
-        function randomColor() {
-            let v = parseInt(Math.random() * 16777216);
-            let s = v.toString(16);
-            const zero = '000000';
-            return '#' + zero.slice(0, 6 - s.length) + s;
-        }
-
-        function createBall(x, y) {
-            const b = $('<div class="ball"></div>');
-            const size = 6 + Math.floor(Math.random() * 31);
-            const c = randomColor();
-            b.css({
-                left: x - size / 2,
-                top: y - size / 2,
-                width: size,
-                height: size,
-                backgroundColor: c
-            });
-            rect.append(b);
-            dataAr.push({
-                x: x,
-                y: y,
-                s: size,
-                c: c,
-            }); // 存放資料
-        }
-
-        $('button').click(function () {
-            $('#ta').val(JSON.stringify(dataAr));
-
-            localStorage.setItem('drawData', JSON.stringify(dataAr));
+    function createBall(x, y) {
+        const b = $('<div class="ball"></div>');
+        const size = 6 + Math.floor(Math.random()*31);
+        const c = randomColor();
+        b.css({
+            left: x - size/2,
+            top: y - size/2,
+            width: size,
+            height: size,
+            backgroundColor: c
         });
+        rect.append(b);
+        dataAr.push({
+            x: x,
+            y: y,
+            s: size,
+            c: c,
+        }); // 存放資料
+    }
 
-        const mDown = function (event) {
-            createBall(event.offsetX, event.offsetY);
-            rect.on('mousemove', mMove);
-        };
-        const mUp = function () {
-            rect.off('mousemove');
-        };
-        const mMove = function (event) {
-            createBall(event.offsetX, event.offsetY);
-        };
+    $('button').click(function(){
+        $('#ta').val( JSON.stringify(dataAr) );
 
-        rect.on('mousedown', mDown);
-        $(window).on('mouseup', mUp);
-    </script>
+        localStorage.setItem('drawData', JSON.stringify(dataAr));
+    });
 
+    const mDown = function (event) {
+        createBall(event.offsetX, event.offsetY);
+        rect.on('mousemove', mMove);
+    };
+    const mUp = function () {
+        rect.off('mousemove');
+    };
+    const mMove = function(event){
+        createBall(event.offsetX, event.offsetY);
+    };
 
-
-
+    rect.on('mousedown', mDown);
+    $(window).on('mouseup', mUp);
+</script>
 
 </body>
-
 </html>

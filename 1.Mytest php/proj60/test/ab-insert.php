@@ -80,7 +80,7 @@ $pageName = 'ab-insert';
 
         let isPass = true;
 
-        if ($name.va; ().lenght < 2) {
+        if ($name.va().lenght < 2) {
             isPass = false;
             $name.css('border', '1px solid red');
             $name.next().text('請輸入正確的姓名');
